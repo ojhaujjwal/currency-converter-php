@@ -1,5 +1,5 @@
 <?php
-require(__DIR__."/CurrencyConverter.php");
+require(__DIR__."/../CurrencyConverter.php");
 use library\CurrencyConverter;
 $CurrencyConverter=new CurrencyConverter(array("country"=>"US"),array("country"=>"NP"));
 $CurrencyConverter->setCachable(TRUE);
