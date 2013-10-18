@@ -37,7 +37,7 @@ With this class, you dont have worry about that, because, you can retrieve rates
 At first you need to call class!
 ```php
 require_once("path/to/CurrencyConverter.php");
-$CurrencyConverter = new CurrencyConverter();
+$CurrencyConverter = new \library\CurrencyConverter();
 ```
 
 #### Setting "From" And "To"
@@ -96,7 +96,7 @@ A simple example is shown below::
 ```php
 function convert_currency(array $from, array $to, $amount=1){
     require_once(__DIR__."/../CurrencyConverter.php");
-    $CurrencyConverter = new library\CurrencyConverter($from, $to);
+    $CurrencyConverter = new \library\CurrencyConverter($from, $to);
     $CurrencyConverter->setCachable(TRUE);
     $CurrencyConverter->setCacheDirectory(__DIR__."/cache/");
     $CurrencyConverter->setCacheTimeOut(10000);
