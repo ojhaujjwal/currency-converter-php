@@ -31,6 +31,14 @@ With this class, you dont have worry about that, because, you can retrieve rates
 
 
 
+## Requirements
+<ul>
+<li>PHP version 5.3.3 or later</li>
+<li>Curl Extension</li>
+</ul>
+
+
+
 ## Usage
 
 #### Initializing Conversion
