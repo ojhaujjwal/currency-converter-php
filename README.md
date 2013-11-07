@@ -6,8 +6,8 @@ Currency Converter Class with features of caching and identifying currency from 
 ## Why Use It
 <ul>
   <li>Object Oriented and Easy-to-Use</li>
-  <li>Reliable Rate, Uses Google API</li>  
-  <li>Caching of rate, to avoid connecting to Google again and again</li>
+  <li>Reliable Rate, Uses Yahoo API</li>  
+  <li>Caching of rate, to avoid connecting to Yahoo again and again</li>
   <li>Conversion without curreny code(from country code)</li>
 </ul>
 
@@ -16,12 +16,12 @@ Currency Converter Class with features of caching and identifying currency from 
 The source code  are fully object oriented and easy to use! You can easily accomodate the source files to your application! 
 
 
-#### Reliable Rate, Uses Google API
-The class uses Google API, "http://www.google.com/ig/calculator?hl=en&q=1[fromCurrency]=?[toCurrency]" for getting rates!
+#### Reliable Rate, Uses Yahoo API
+The class uses Yahoo API, "http://download.finance.yahoo.com/d/quotes.csv?s=USDNPR=X&f=nl1d1t1" for getting rates!
 
 
-#### Caching of rate, to avoid connecting to Google again and again
-It might not be intelligent to connect to Google for the same rate regularly. This is not tolerable in production state.
+#### Caching of rate, to avoid connecting to Yahoo again and again
+It might not be intelligent to connect to Yahoo for the same rate regularly. This is not tolerable in production state.
 So, this class uses caching system to improve performance! You can easily set cache directory(directory where cache exists) and cache expiry.
 
 
