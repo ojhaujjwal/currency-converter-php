@@ -6,7 +6,8 @@ class CurrencyConverter
     /*
     **  url where Curl request is made 
     */
-    const GOOGLE_API_URl="http://www.google.com/ig/calculator?hl=en&q=1[fromCurrency]=?[toCurrency]";
+    //const API_URl="http://www.google.com/ig/calculator?hl=en&q=1[fromCurrency]=?[toCurrency]";
+    const API_URl = "http://download.finance.yahoo.com/d/quotes.csv?s=[fromCurrency][toCurrency]=X&f=nl1d1t1";
 
 
 	/*
@@ -207,7 +208,7 @@ class CurrencyConverter
         $url = str_replace(
                 array("[fromCurrency]","[toCurrency]"), 
                 array($from_Currency,$to_Currency), 
-                self::GOOGLE_API_URl);
+                self::API_URl);
         
         $ch = curl_init();
         $timeout = 0;
@@ -217,10 +218,7 @@ class CurrencyConverter
         curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
         $rawdata = curl_exec($ch);
         curl_close($ch);
-
-        $data = explode('"', $rawdata);
-        $data = explode(' ', $data['3']);
-        $rate = $data['0'];
+        $rate = explode(",",$rawdata)[1];
         $this->newCache($rate); 
         return $rate;          
     }
