@@ -5,5 +5,11 @@
         "psr-0": {
             "CurrencyConverter\\": "src/"
         }
-    }
+    },
+    "authors": [
+        {
+            "name": "ojhaujjwal",
+            "email": "bring2uo@gmail.com"
+        }
+    ],
 }
