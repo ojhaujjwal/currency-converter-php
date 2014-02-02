@@ -1,0 +1,9 @@
+{
+    "name": "ujjwal/currency-converter",
+    "description": "Currency Converter Class with features of caching and identifying currency from country Code",
+    "autoload": {
+        "psr-0": {
+            "CurrencyConverter\\": "src/"
+        }
+    }
+}

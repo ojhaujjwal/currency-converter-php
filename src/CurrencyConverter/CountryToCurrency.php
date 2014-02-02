@@ -1,24 +1,17 @@
 <?php
     
-namespace library;
+namespace CurrencyConverter;
 
 class CountryToCurrency
 {
-    
-
-    /*
-    **  @param countryCode  --  code of country whose locale is to be determined
-    **  @default    --  "US"(United States)
-    */
-    private $countryCode="US";    
-    
-    
-    /*
-    **  @param array $currencies  --  array of currencies
-    **      key contains country code
-    **      value contains respective country currency
-    */
-    private $currencies = array(
+        
+    /**
+     * @array $currencies   
+     *      array of currencies
+     *      key contains country code
+     *      value contains respective country currency
+     */
+    protected static $currencies = array(
 					'AF' => 'AFA',
 					'AL' => 'ALL',
 					'DZ' => 'DZD',
@@ -261,37 +254,20 @@ class CountryToCurrency
 					'ZW' => 'USD'
     );
 
-    /*
-    **  @function __construct   -- if parameter,$countryCode is provided this returns currency else null
-    **  @param string optional $countryCode --  country code 
-    */    
-    public function __construct($countryCode=NULL){
-        if($countryCode!=NULL){
-            return $this->getCurrency($countryCode);
-        }
-    }
- 
-     /*
-    **  @function setCountryCode    --  check if country code is supported, stores country code in property,$countryCode
-    **  @throws Exception if country code is not supported
-    */   
-    public function setCountryCode($countryCode){
-        if($countryCode!=NULL){
-            if(!array_key_exists($countryCode,$this->currencies)){
-                throw new \InvalidArgumentException("Country Code Not Supported!");
-            }
-            $this->countryCode=$countryCode;            
+
+    /**
+     * returns Currency code by Country code
+     *
+     * @param string $countryCode   Country code
+     * @return string 
+     * @thrown Exception\InvalidArgumentException
+     */    
+    public static function getCurrency($countryCode)
+    {
+        if (!array_key_exists($countryCode, self::$currencies)) {
+            throw new Exception\InvalidArgumentException(sprintf('Unsupported Country Code, %s'), $countryCode);
         }
 
-    }
-
-    /*
-    **  @function getCurrency    --  returns curreny code by country code
-    **  @param string optional $countryCode --  country code 
-    */    
-    public function getCurrency($countryCode=NULL){
-        $this->setCountryCode($countryCode);
-        return $this->currencies[$this->countryCode];
+        return self::$currencies[$countryCode];
     }   
 }
-?>

@@ -1,8 +1,15 @@
 <?php
-require(__DIR__."/../CurrencyConverter.php");
-use library\CurrencyConverter;
-$CurrencyConverter=new CurrencyConverter(array("country"=>"US"),array("country"=>"NP"));
-$CurrencyConverter->setCachable(TRUE);
-$CurrencyConverter->setCacheDirectory(__DIR__."/cache/");
-$CurrencyConverter->setCacheTimeOut(100);
-echo $CurrencyConverter->convert();
+
+use CurrencyConverter\CurrencyConverter;
+    
+chdir(dirname(__DIR__));
+
+require 'vendor/autoload.php';
+
+$converter = new CurrencyConverter;
+$converter->setCachable(true);
+$converter->setCacheDirectory(__DIR__ . '/cache/');
+$converter->setCacheTimeOut(100);
+$amount =  $converter->convert(array('country' => 'US'), array('country' => 'NP'));
+
+echo $amount;
