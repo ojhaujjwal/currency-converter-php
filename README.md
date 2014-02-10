@@ -78,3 +78,7 @@ $converter->setCacheTimeOut("time_in_seconds");
 $amount =  $converter->convert(array('country' => 'US'), array('country' => 'NP'), $amount);// $amount is optional and defaults to 1
 ```
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/ojhaujjwal/currency-converter-php/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
