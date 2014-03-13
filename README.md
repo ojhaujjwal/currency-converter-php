@@ -35,9 +35,9 @@ With this library, you dont have worry about that, because, you can retrieve rat
 * Curl Extension
 
 ## Installation
-This library depends on composer(for installation and autoloading and whatever). For installation of composer please visit composer.org 
+This library depends on composer for installation . For installation of composer, please visit [getcomposer.org](getcomposer.org). 
 
-1. Add `ujjwal/currency-converter` to your composer.json and run `php composer.phar self-update`
+1. Add `"ujjwal/currency-converter":"1.1.*"` to your composer.json and run `php composer.phar update`
 
 ## Usage
 
