@@ -8,7 +8,6 @@ chdir(dirname(__DIR__));
 require 'vendor/autoload.php';
 
 $converter = new CurrencyConverter;
-$converter->setCachable();
 $cacheAdapter = new FileSystem(__DIR__ . '/cache/');
 $cacheAdapter->setCacheTimeout(10);
 $converter->setCacheAdapter($cacheAdapter);
