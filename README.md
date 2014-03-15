@@ -34,7 +34,7 @@ This library depends on composer for installation . For installation of composer
 1. Add `"ujjwal/currency-converter":"1.1.*"` to your composer.json and run `php composer.phar update`
 
 ## Usage
-A simple example is given in examples/simple.php
+A simple example is given in `examples/simple.php`
 
 For further documentation, please look at the `/docs`.
 
