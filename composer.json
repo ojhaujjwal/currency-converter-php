@@ -1,6 +1,7 @@
 {
     "name": "ujjwal/currency-converter",
     "description": "Currency Converter Class with features of caching and identifying currency from country Code",
+    "license": "MIT",
     "autoload": {
         "psr-0": {
             "CurrencyConverter\\": "src/"
@@ -11,5 +12,11 @@
             "name": "ojhaujjwal",
             "email": "bring2uo@gmail.com"
         }
-    ]
+    ],
+    "require-dev": {
+        "ext-curl": "*"
+    },
+    "suggest": {
+        "ext-curl": "Using the rate provider for gettting the rate from yahoo using curl extension"
+    }  
 }

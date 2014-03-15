@@ -1,0 +1,5 @@
+﻿<phpunit bootstrap="./Bootstrap.php">
+    <testsuite name="CurrencyConverterTest">
+        <directory>CurrencyConverterTest</directory>
+    </testsuite>
+</phpunit>
