@@ -2,10 +2,8 @@ currency-converter-php
 ======================
 
 [![Master Branch Build Status](https://api.travis-ci.org/ojhaujjwal/currency-converter-php.png?branch=master)](http://travis-ci.org/ojhaujjwal/currency-converter-php)
-[![Latest Stable Version](https://poser.pugx.org/ojhaujjwal/ujjwal/currency-converter/v/stable.png)](https://packagist.org/packages/ojhaujjwal/ujjwal/currency-converter)
-[![Latest Unstable Version](https://poser.pugx.org/ojhaujjwal/ujjwal/currency-converter/v/unstable.png)](https://packagist.org/packages/ojhaujjwal/ujjwal/currency-converter)
-[![Total Downloads](https://poser.pugx.org/ojhaujjwal/ujjwal/currency-converter/downloads.png)](https://packagist.org/packages/ojhaujjwal/ujjwal/currency-converter)
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/ojhaujjwal/htimgmodule/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+[![Latest Stable Version](https://poser.pugx.org/ujjwal/currency-converter/v/stable.png)](https://packagist.org/packages/ujjwal/currency-converter)
+[![Latest Unstable Version](https://poser.pugx.org/ujjwal/currency-converter/v/unstable.png)](https://packagist.org/packages/ujjwal/currency-converter)
 
 Currency Converter Library with features of caching and identifying currency from country Code
 
