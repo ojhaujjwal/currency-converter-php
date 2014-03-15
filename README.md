@@ -15,7 +15,7 @@ Currency Converter Library with features of caching and identifying currency fro
 
 
 #### Reliable Rate, Uses Yahoo API
-By default, the library uses Yahoo API, "http://download.finance.yahoo.com/d/quotes.csv?s=USDNPR=X&f=nl1d1t1" for getting rates!
+By default, the library uses Yahoo API for getting rates!
 
 #### Caching of rate, to avoid connecting to Yahoo again and again
 It might not be intelligent to connect to Yahoo for the same rate regularly. This is not tolerable in production state.
@@ -30,12 +30,12 @@ With this library, you dont have worry about that, because, you can retrieve rat
 ## Requirements
 
 * PHP version 5.4 or later
-* Curl Extension (Optional) (If you want to get the exchange rates from Yahoo using `CurrencyConverter\Provider\YahooApi`)
+* Curl Extension (Optional)
 
 ## Installation
 This library depends on composer for installation . For installation of composer, please visit [getcomposer.org](getcomposer.org). 
 
-1. Add `"ujjwal/currency-converter":"1.1.*"` to your composer.json and run `php composer.phar update`
+1. Add `"ujjwal/currency-converter":"2.0.*"` to your composer.json and run `php composer.phar update`
 
 ## Usage
 A simple example is given in [examples/simple.php](https://github.com/ojhaujjwal/currency-converter-php/blob/master/examples/simple.php).
