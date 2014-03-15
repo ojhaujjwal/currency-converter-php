@@ -262,7 +262,7 @@ class CountryToCurrency
     public static function getCurrency($countryCode)
     {
         if (!array_key_exists($countryCode, self::$currencies)) {
-            throw new Exception\InvalidArgumentException(sprintf('Unsupported Country Code, %s'), $countryCode);
+            throw new Exception\InvalidArgumentException(sprintf('Unsupported Country Code, %s', $countryCode));
         }
 
         return self::$currencies[$countryCode];
