@@ -32,7 +32,7 @@ class Session implements CacheAdapterInterface
     {
         if (isset($_SESSION['exchange_rates'][$fromCurrency][$toCurrency])) {
             $storage = $_SESSION['exchange_rates'][$fromCurrency][$toCurrency];
-            return $storage['created_time] < (time() - $this->getCacheTimeOut());
+            return $storage['created_time'] < (time() - $this->getCacheTimeOut());
         }
     }
 
