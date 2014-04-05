@@ -3,7 +3,7 @@
     "description": "Currency Converter Class with features of caching and identifying currency from country Code",
     "license": "MIT",
     "autoload": {
-        "psr-0": {
+        "psr-4": {
             "CurrencyConverter\\": "src/"
         }
     },
