@@ -23,7 +23,7 @@ class FileSystem extends AbstractAdapter
     /**
      * Sets cachePath
      *
-     * @param string $cachePath
+     * @param  string                               $cachePath
      * @throws Exception\CachePathNotFoundException
      * @return self
      */
@@ -49,10 +49,10 @@ class FileSystem extends AbstractAdapter
 
     /**
      * {@inheritDoc}
-     */    
+     */
     protected function getCacheCreationTime($fromCurrency, $toCurrency)
     {
-       return filemtime($this->getCacheFileLocation($fromCurrency, $toCurrency)); 
+       return filemtime($this->getCacheFileLocation($fromCurrency, $toCurrency));
     }
 
     /**
@@ -71,8 +71,8 @@ class FileSystem extends AbstractAdapter
     /**
      * Gets file location for specific currency conversion
      *
-     * @param string $fromCurrency 
-     * @param string $toCurrency
+     * @param  string $fromCurrency
+     * @param  string $toCurrency
      * @return string
      */
     protected function getCacheFileLocation($fromCurrency, $toCurrency)
@@ -82,21 +82,21 @@ class FileSystem extends AbstractAdapter
 
     /**
      * {@inheritDoc}
-     */    
+     */
     public function createCache($fromCurrency, $toCurrency, $rate)
     {
-	    $cacheFile = $this->getCacheFileLocation($fromCurrency, $toCurrency);
+        $cacheFile = $this->getCacheFileLocation($fromCurrency, $toCurrency);
         if (!file_exists($cacheFile)) {
             touch($cacheFile);
         }
-	    file_put_contents($cacheFile, $rate);        
+        file_put_contents($cacheFile, $rate);
     }
- 
+
     /**
      * {@inheritDoc}
-     */     
+     */
     public function getRate($fromCurrency, $toCurrency)
     {
         return file_get_contents($this->getCacheFileLocation($fromCurrency, $toCurrency));
-    } 
+    }
 }

@@ -3,7 +3,7 @@ namespace CurrencyConverterTest\Cache\Adapter;
 
 use CurrencyConverter\Cache\Adapter\FileSystem;
 
-class FileSystemTest extends \PHPUnit_Framework_TestCase 
+class FileSystemTest extends \PHPUnit_Framework_TestCase
 {
     public function testSetCachePath()
     {
@@ -18,7 +18,6 @@ class FileSystemTest extends \PHPUnit_Framework_TestCase
         $adapter = new FileSystem(__DIR__ . '/asf/');
     }
 
-
     public function testCreateCache()
     {
         $cachePath = __DIR__ . '/../../../resources/cache';
@@ -26,6 +25,7 @@ class FileSystemTest extends \PHPUnit_Framework_TestCase
         $adapter->createCache('ABC', 'DEF', 10);
         $this->assertEquals(10, file_get_contents($cachePath . '/ABC-DEF.cache'));
         $this->assertEquals(10, $adapter->getRate('ABC', 'DEF'));
+
         return $adapter;
     }
 

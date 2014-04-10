@@ -20,8 +20,8 @@ interface CacheAdapterInterface
     /**
      * Checks if cache exists
      *
-     * @param string $fromCurrency
-     * @param string $toCurrency
+     * @param  string $fromCurrency
+     * @param  string $toCurrency
      * @return bool
      */
     public function cacheExists($fromCurrency, $toCurrency);
@@ -29,8 +29,8 @@ interface CacheAdapterInterface
     /**
      * Gets exchange rate from cache
      *
-     * @param string $fromCurrency
-     * @param string $toCurrency
+     * @param  string $fromCurrency
+     * @param  string $toCurrency
      * @return float
      */
     public function getRate($fromCurrency, $toCurrency);
@@ -38,9 +38,9 @@ interface CacheAdapterInterface
     /**
      * Creates new cache
      *
-     * @param string $fromCurrency
-     * @param string $toCurrency
-     * @param float rate
+     * @param  string $fromCurrency
+     * @param  string $toCurrency
+     *                              @param float rate
      * @return void
      */
     public function createCache($fromCurrency, $toCurrency, $rate);

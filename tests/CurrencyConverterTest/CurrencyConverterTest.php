@@ -21,14 +21,14 @@ class CurrencyConverterTest extends \PHPUnit_Framework_TestCase
         $converter = new CurrencyConverter;
         $cacheAdapter = $this->getMock('CurrencyConverter\Cache\Adapter\FileSystem');
         $map = [
-            ['USD', 'NPR', 97]        
+            ['USD', 'NPR', 97]
         ];
         $cacheAdapter->expects($this->any())
             ->method('getRate')
             ->will($this->returnValueMap($map));
         $map = [
             ['USD', 'NPR', true],
-            ['NPR', 'USD', false]                
+            ['NPR', 'USD', false]
         ];
         $cacheAdapter->expects($this->any())
             ->method('cacheExists')

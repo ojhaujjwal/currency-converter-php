@@ -3,12 +3,12 @@ namespace CurrencyConverter\Cache\Adapter;
 
 abstract class AbstractAdapter implements CacheAdapterInterface
 {
-	/**
-	 * Length of cache time validity in seconds
+    /**
+     * Length of cache time validity in seconds
      *
      * @var float
-	 */
-	protected $cacheTimeout = 18000; // 5 hours    
+     */
+    protected $cacheTimeout = 18000; // 5 hours
 
     /**
      * {@inheritDoc)
@@ -31,8 +31,8 @@ abstract class AbstractAdapter implements CacheAdapterInterface
     /**
      * Checks if cache is expired
      *
-     * @param string $fromCurrency
-     * @param string $toCurrency
+     * @param  string $fromCurrency
+     * @param  string $toCurrency
      * @return bool
      */
     protected function isCacheExpired($fromCurrency, $toCurrency)
@@ -43,8 +43,8 @@ abstract class AbstractAdapter implements CacheAdapterInterface
     /**
      * Returns timestamp in which cache was created
      *
-     * @param string $fromCurrency
-     * @param string $toCurrency
+     * @param  string $fromCurrency
+     * @param  string $toCurrency
      * @return int
      */
     abstract protected function getCacheCreationTime($fromCurrency, $toCurrency);

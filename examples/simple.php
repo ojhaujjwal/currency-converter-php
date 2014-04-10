@@ -2,7 +2,7 @@
 
 use CurrencyConverter\CurrencyConverter;
 use CurrencyConverter\Cache\Adapter\FileSystem;
-    
+
 chdir(dirname(__DIR__));
 
 require 'vendor/autoload.php';

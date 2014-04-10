@@ -1,5 +1,5 @@
 <?php
 namespace CurrencyConverter\Exception;
 
-class RuntimeException extends \RuntimeException implements ExceptionInterface
+class RunTimeException extends \RuntimeException implements ExceptionInterface
 {}

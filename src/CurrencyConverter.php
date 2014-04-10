@@ -4,12 +4,12 @@ namespace CurrencyConverter;
 
 class CurrencyConverter
 {
-	/**
-	 * store cache or not
+    /**
+     * store cache or not
      *
      * @var bool
-	 */
-	protected $cachable = false;
+     */
+    protected $cachable = false;
 
     /**
      * @var Provider\ProviderInterface
@@ -24,8 +24,8 @@ class CurrencyConverter
     /**
      * Converts currency from one to another
      *
-     * @param array|string $from
-     * @param array|string $to
+     * @param array|string   $from
+     * @param array|string   $to
      * @param float optional $amount
      *
      * @return float
@@ -40,7 +40,7 @@ class CurrencyConverter
                 return $this->getCacheAdapter()->getRate($fromCurrency, $toCurrency) * $amount;
             } elseif ($this->getCacheAdapter()->cacheExists($toCurrency, $fromCurrency)) {
                 return (1 / $this->getCacheAdapter()->getRate($toCurrency, $fromCurrency)) * $amount;
-            }            
+            }
         }
 
         $rate = $this->getRateProvider()->getRate($fromCurrency, $toCurrency);
@@ -55,7 +55,7 @@ class CurrencyConverter
     /**
      * Sets if caching is to be enables
      *
-     * @param boolean $cachable
+     * @param  boolean $cachable
      * @return self
      */
     public function setCachable($cachable = true)
@@ -92,7 +92,7 @@ class CurrencyConverter
     /**
      * Sets rate provider
      *
-     * @param Provider\ProviderInterface $rateProvider
+     * @param  Provider\ProviderInterface $rateProvider
      * @return self
      *
      */
@@ -106,7 +106,7 @@ class CurrencyConverter
     /**
      * Sets cache adapter
      *
-     * @param Cache\Adapter\CacheAdapterInterface $cacheAdapter
+     * @param  Cache\Adapter\CacheAdapterInterface $cacheAdapter
      * @return self
      */
     public function setCacheAdapter(Cache\Adapter\CacheAdapterInterface $cacheAdapter)
@@ -142,12 +142,11 @@ class CurrencyConverter
                 $currency = $data['currency'];
             } else {
                 throw new Exception\InvalidArgumentException('Please provide country or currency!');
-            }            
+            }
         } else {
             throw new Exception\InvalidArgumentException('Invalid currency provided. String or array expected.');
         }
-        
-        
-        return $currency;        
+
+        return $currency;
     }
 }
