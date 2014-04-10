@@ -36,6 +36,16 @@ class CurrencyConverterTest extends \PHPUnit_Framework_TestCase
         $converter->setCacheAdapter($cacheAdapter);
         $this->assertEquals(97, $converter->convert('USD', 'NPR'));
         $this->assertEquals(1 / 97, $converter->convert('NPR', 'USD'));
+        $this->assertEquals(97, $converter->convert(['country' => 'US'], ['country' => 'NP']));
+        $this->assertEquals(1 / 97, $converter->convert(['country' => 'NP'], ['country' => 'US']));
 
+    }
+
+    public function testGetExceptionWithInvalidCurrencyArgument()
+    {
+        $converter = new CurrencyConverter;
+        $this->setExpectedException('CurrencyConverter\Exception\InvalidArgumentException');
+        $converter->convert([], []);
+        $converter->convert(29, 456);
     }
 }

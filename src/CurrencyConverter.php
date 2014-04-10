@@ -32,32 +32,8 @@ class CurrencyConverter
      */
     public function convert($from, $to, $amount = 1)
     {
-        if (is_string($from)) {
-            $fromCurrency = $from;
-        } elseif (is_array($from)) {
-            if (isset($from['country'])) {
-                $fromCurrency = CountryToCurrency::getCurrency($from['country']);
-            } elseif (isset($from['currency'])) {
-                $fromCurrency = $from['currency'];
-            } else {
-                throw new Exception\InvalidArgumentException('Please provide country or currency under from');
-            }            
-        } else {
-            
-        }
-        if (is_string($to)) {
-            $toCurrency = $to;
-        } elseif (is_array($to)) {
-            if (isset($to['country'])) {
-                $toCurrency = CountryToCurrency::getCurrency($to['country']);
-            } elseif (isset($to['currency'])) {
-                $toCurrency = $to['currency'];
-            } else {
-                throw new Exception\InvalidArgumentException('Please provide country or currency under from');
-            }            
-        } else {
-            
-        }
+        $fromCurrency = $this->parseCurrencyArgument($from);
+        $toCurrency = $this->parseCurrencyArgument($to);
 
         if ($this->isCacheable()) {
             if ($this->getCacheAdapter()->cacheExists($fromCurrency, $toCurrency)) {
@@ -153,5 +129,25 @@ class CurrencyConverter
         }
 
         return $this->cacheAdapter;
+    }
+
+    protected function parseCurrencyArgument($data)
+    {
+        if (is_string($data)) {
+            $currency = $data;
+        } elseif (is_array($data)) {
+            if (isset($data['country'])) {
+                $currency = CountryToCurrency::getCurrency($data['country']);
+            } elseif (isset($data['currency'])) {
+                $currency = $data['currency'];
+            } else {
+                throw new Exception\InvalidArgumentException('Please provide country or currency!');
+            }            
+        } else {
+            throw new Exception\InvalidArgumentException('Invalid currency provided. String or array expected.');
+        }
+        
+        
+        return $currency;        
     }
 }
