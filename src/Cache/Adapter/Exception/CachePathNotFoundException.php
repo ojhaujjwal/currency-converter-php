@@ -1,5 +1,5 @@
 <?php
 namespace CurrencyConverter\Cache\Adapter\Exception;
 
-class CachePathNotFoundException extends \RunTimeException implements ExceptionInterface
+class CachePathNotFoundException extends \RuntimeException implements ExceptionInterface
 {}
