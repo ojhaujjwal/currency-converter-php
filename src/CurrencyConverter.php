@@ -145,6 +145,9 @@ class CurrencyConverter
             }            
         } else {
             throw new Exception\InvalidArgumentException('Invalid currency provided. String or array expected.');
-        }        
+        }
+        
+        
+        return $currency;        
     }
 }
