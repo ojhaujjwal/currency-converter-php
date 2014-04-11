@@ -86,3 +86,18 @@ class Session extends AbstractAdapter
         
 }
 ```
+
+Now let`s use it:
+
+```php
+<?php
+
+use CurrencyConverter\CurrencyConverter;
+use Application\Cache\Adapter\Session;
+require 'vendor/autoload.php';
+$converter = new CurrencyConverter;
+$cacheAdapter = new Session;
+$cacheAdapter->setCacheTimeout(10); // 10 seconds
+$converter->setCacheAdapter($cacheAdapter);
+echo  $converter->convert('USD', 'NPR'); // will print something like 97
+```
