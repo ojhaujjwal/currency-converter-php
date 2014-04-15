@@ -9,6 +9,22 @@ currency-converter-php
 
 Currency Converter Library with features of caching and identifying currency from country Code
 
+## Getting started
+```php
+<?php
+require 'vendor/autoload.php';
+
+$converter = new CurrencyConverter\CurrencyConverter;
+echo $converter->convert('USD', 'NPR'); // will print something like 97.44
+
+// caching currency
+
+$cacheAdapter = new CurrencyConverter\Cache\Adapter\FileSystem(__DIR__ . '/cache/');
+$cacheAdapter->setCacheTimeout(10);
+$converter->setCacheAdapter($cacheAdapter);
+echo $converter->convert('USD', 'NPR');
+```
+
 ## Why Use It
 
 * Reliable Rate, Uses Yahoo API
