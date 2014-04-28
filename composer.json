@@ -2,6 +2,13 @@
     "name": "ujjwal/currency-converter",
     "description": "Currency Converter Class with features of caching and identifying currency from country Code",
     "license": "MIT",
+    "keywords": [
+        "money",
+        "currency",
+        "currency-converter",
+        "converter",
+        "exchange-rates"
+    ],
     "autoload": {
         "psr-4": {
             "CurrencyConverter\\": "src/"
