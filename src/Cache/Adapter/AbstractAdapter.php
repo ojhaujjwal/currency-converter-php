@@ -43,7 +43,7 @@ abstract class AbstractAdapter implements CacheAdapterInterface
      */
     protected function isCacheExpired($fromCurrency, $toCurrency)
     {
-        return (time() - $this->getCacheCreationTime($fromCurrency, $toCurrency)) > $this->getCacheTimeOut()->format('s');
+        return (time() - $this->getCacheCreationTime($fromCurrency, $toCurrency)) > $this->getCacheTimeOut()->format('%s');
     }
 
     /**
