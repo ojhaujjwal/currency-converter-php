@@ -20,7 +20,7 @@ echo $converter->convert('USD', 'NPR'); // will print something like 97.44
 // caching currency
 
 $cacheAdapter = new CurrencyConverter\Cache\Adapter\FileSystem(__DIR__ . '/cache/');
-$cacheAdapter->setCacheTimeout(10);
+$cacheAdapter->setCacheTimeout(DateInterval::createFromDateString('10 second'));
 $converter->setCacheAdapter($cacheAdapter);
 echo $converter->convert('USD', 'NPR');
 ```
