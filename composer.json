@@ -21,9 +21,11 @@
         }
     ],
     "require-dev": {
-        "ext-curl": "*"
+        "ext-curl": "*",
+        "zendframework/zend-cache": "2.*"
     },
     "suggest": {
-        "ext-curl": "Using the rate provider for gettting the rate from yahoo using curl extension"
+        "ext-curl": "Using the rate provider for gettting the rate from yahoo using curl extension",
+        "zendframework/zend-cache": "To use Zend Cache component for caching"
     }  
 }

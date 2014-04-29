@@ -5,20 +5,6 @@ use DateInterval;
 
 interface CacheAdapterInterface
 {
-    /*
-     *  Sets cache timeout
-     *
-     *  @param DateInterval $cacheTimeout Interval after which cache expires
-     *  @return self
-     */
-    public function setCacheTimeOut(DateInterval $cacheTimeout);
-
-    /**
-     *  Gets currently enabled cache timeout
-     *  @returns DateInterval
-     */
-    public function getCacheTimeOut();
-
     /**
      * Checks if cache exists
      *
