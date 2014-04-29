@@ -2,6 +2,7 @@
 namespace CurrencyConverterTest\Cache\Adapter;
 
 use CurrencyConverter\Cache\Adapter\FileSystem;
+use DateInterval;
 
 class FileSystemTest extends \PHPUnit_Framework_TestCase
 {
@@ -34,7 +35,16 @@ class FileSystemTest extends \PHPUnit_Framework_TestCase
      */
     public function testCacheExists($adapter)
     {
-        $adapter->setCacheTimeOut(123123123);
+        $adapter->setCacheTimeOut(DateInterval::createFromDateString('123123123 seconds'));
         $this->assertTrue($adapter->cacheExists('ABC', 'DEF'));
+    }
+
+    public function testSetCacheTimeOut()
+    {
+        $cachePath = __DIR__ . '/../../../resources/cache';
+        $adapter = new FileSystem($cachePath);
+        $dateInterval = DateInterval::createFromDateString('123123123 seconds');
+        $adapter->setCacheTimeOut($dateInterval);
+        $this->assertEquals($dateInterval, $adapter->getCacheTimeOut());
     }
 }

@@ -9,7 +9,7 @@ require 'vendor/autoload.php';
 
 $converter = new CurrencyConverter;
 $cacheAdapter = new FileSystem(__DIR__ . '/cache/');
-$cacheAdapter->setCacheTimeout(10);
+$cacheAdapter->setCacheTimeout(DateInterval::createFromDateString('10 second'));
 $converter->setCacheAdapter($cacheAdapter);
 $amount =  $converter->convert('USD', 'NPR');
 // or you can do $amount =  $converter->convert(array('country' => 'US'), array('country' => 'NP'));

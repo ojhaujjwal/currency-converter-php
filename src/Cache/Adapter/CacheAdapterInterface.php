@@ -1,19 +1,21 @@
 <?php
 namespace CurrencyConverter\Cache\Adapter;
 
+use DateInterval;
+
 interface CacheAdapterInterface
 {
     /*
      *  Sets cache timeout
      *
-     *  @param float $cacheTimeout Timeout after which cache expires
+     *  @param DateInterval $cacheTimeout Interval after which cache expires
      *  @return self
      */
-    public function setCacheTimeOut($cacheTimeout);
+    public function setCacheTimeOut(DateInterval $cacheTimeout);
 
     /**
      *  Gets currently enabled cache timeout
-     *  @returns float
+     *  @returns DateInterval
      */
     public function getCacheTimeOut();
 
