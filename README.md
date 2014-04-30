@@ -53,7 +53,7 @@ With this library, you dont have worry about that, because, you can retrieve rat
 ## Installation
 This library depends on composer for installation . For installation of composer, please visit [getcomposer.org](//getcomposer.org). 
 
-Add `"ujjwal/currency-converter":"2.0.*"` to your composer.json and run `php composer.phar update`
+Add `"ujjwal/currency-converter":"2.1.*"` to your composer.json and run `php composer.phar update`
 
 ## Usage
 A simple example is given in [examples/simple.php](https://github.com/ojhaujjwal/currency-converter-php/blob/master/examples/simple.php).
