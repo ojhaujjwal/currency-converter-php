@@ -11,4 +11,4 @@
 
 ### 2.1.1
 * Added Zend Cache Adapter
-* Removed `setCacheTimeOut` and `getCacheTimeOut` from 'CurrencyConverter\Cache\Adapter\CacheAdapterInterface'.
+* Removed `setCacheTimeOut` and `getCacheTimeOut` from `CurrencyConverter\Cache\Adapter\CacheAdapterInterface`.
