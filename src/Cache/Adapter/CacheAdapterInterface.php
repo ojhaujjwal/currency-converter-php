@@ -1,8 +1,6 @@
 <?php
 namespace CurrencyConverter\Cache\Adapter;
 
-use DateInterval;
-
 interface CacheAdapterInterface
 {
     /**

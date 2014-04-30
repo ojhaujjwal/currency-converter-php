@@ -10,7 +10,7 @@ abstract class AbstractAdapter implements CacheAdapterInterface
      *
      * @var DateInterval
      */
-    protected $cacheTimeout; 
+    protected $cacheTimeout;
 
     /**
      * {@inheritDoc)
