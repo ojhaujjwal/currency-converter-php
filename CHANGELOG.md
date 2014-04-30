@@ -6,5 +6,9 @@
 * Addition of cache adapters
 * Additions of rate providers
 
-### 2.1
+### 2.1.0
 * Used DateInterval class instead of seconds for cache time out
+
+### 2.1.1
+* Added Zend Cache Adapter
+* Removed `setCacheTimeOut` and `getCacheTimeOut` from 'CurrencyConverter\Cache\Adapter\CacheAdapterInterface'.
