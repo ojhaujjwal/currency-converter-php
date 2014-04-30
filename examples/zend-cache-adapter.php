@@ -6,8 +6,8 @@ $converter = new CurrencyConverter\CurrencyConverter;
 // Via factory:
 $zendCache = Zend\Cache\StorageFactory::factory(array(
     'adapter' => array(
-        'name'    => 'apc',
-        'options' => array('ttl' => 10),
+        'name'    => 'Filesystem',
+        'options' => array('ttl' => 10, 'cache_dir' => __DIR__ . '/cache'),
     )
 ));
 
