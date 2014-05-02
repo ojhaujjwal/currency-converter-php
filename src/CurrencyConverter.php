@@ -2,7 +2,7 @@
 
 namespace CurrencyConverter;
 
-class CurrencyConverter
+class CurrencyConverter implements CurrencyConverterInterface
 {
     /**
      * store cache or not
@@ -22,13 +22,7 @@ class CurrencyConverter
     protected $cacheAdapter;
 
     /**
-     * Converts currency from one to another
-     *
-     * @param array|string   $from
-     * @param array|string   $to
-     * @param float optional $amount
-     *
-     * @return float
+     * {@inheritDoc}
      */
     public function convert($from, $to, $amount = 1)
     {
