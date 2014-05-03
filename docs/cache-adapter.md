@@ -3,11 +3,11 @@ Cache Adapters
 
 Cache adapters are classes that store and cache currency exchange rates. A cache adapter must implement `CurrencyConverter\Cache\Adapter\CacheAdapterInterface`.
 
-This library comes with just a cache adapter, `CurrencyConverter\Cache\Adapter\FileSystem` which stores cache in file system.
+This library comes with just two cache adapters, `CurrencyConverter\Cache\Adapter\FileSystem` which stores cache in file system and `CurrencyConverter\Cache\Adapter\ZendAdapter` which acts as an abstraction layer between this library and [Zend Framework 2](https://github.com/zendframework/zf2) Cache Component.
 
 ## Creating custom adapters
 
-Lets create a adapter which uses session to store cache and retrive cache.
+Lets create a adapter which uses session to store cache.
 
 ```php
 namespace Application\CurrencyConverter\Cache\Adapter;
@@ -16,42 +16,26 @@ use CurrencyConverter\Cache\Adapter\CacheAdapterInterface;
 
 class Session implements CacheAdapterInterface
 {
-	protected $cacheTimeout = 18000; // 5 hours    
-
-    public function setCacheTimeOut($cacheTimeout)
-    {
-        $this->cacheTimeout = $cacheTimeout;
-    }
-
-    public function getCacheTimeOut()
-    {
-        return $this->cacheTimeout;
-    }
-
     public function cacheExists($fromCurrency, $toCurrency)
     {
-        if (isset($_SESSION['exchange_rates'][$fromCurrency][$toCurrency])) {
-            $storage = $_SESSION['exchange_rates'][$fromCurrency][$toCurrency];
-            return $storage['created_time'] < (time() - $this->getCacheTimeOut());
-        }
+        return isset($_SESSION['exchange_rates'][$fromCurrency][$toCurrency]);
     }
 
     public function getRate($fromCurrency, $toCurrency)
     {
-        $_SESSION['exchange_rates'][$fromCurrency][$toCurrency]['rate'];
+        return $_SESSION['exchange_rates'][$fromCurrency][$toCurrency]['rate'];
     }
 
     public function createCache($fromCurrency, $toCurrency, $rate)
     {
         $_SESSION['exchange_rates'][$fromCurrency][$toCurrency]['rate'] = $rate;
-        $_SESSION['exchange_rates'][$fromCurrency][$toCurrency]['created_time'] = time();
     }
         
 }
 ```
 
 ## A better way
-You can also create a cache adapter by extending `CurrencyConverter\Cache\Adapter\AbstractAdapter`:
+But, the above cache adapter does not have expiry of cached rates. So, a better way is to extend `CurrencyConverter\Cache\Adapter\AbstractAdapter`:
 ```php
 namespace Application\CurrencyConverter\Cache\Adapter;
 
@@ -97,7 +81,7 @@ use Application\Cache\Adapter\Session;
 require 'vendor/autoload.php';
 $converter = new CurrencyConverter;
 $cacheAdapter = new Session;
-$cacheAdapter->setCacheTimeout(10); // 10 seconds
+$cacheAdapter->setCacheTimeout(DateInterval::createFromDateString('10 seconds'));
 $converter->setCacheAdapter($cacheAdapter);
 echo  $converter->convert('USD', 'NPR'); // will print something like 97
 ```
