@@ -1,6 +1,6 @@
-﻿<phpunit bootstrap="./Bootstrap.php">
+﻿<phpunit bootstrap="./tests/Bootstrap.php">
     <testsuite name="CurrencyConverterTest">
-        <directory>CurrencyConverterTest</directory>
+        <directory>tests/CurrencyConverterTest/</directory>
     </testsuite>
   <logging>
     <log type="coverage-text" target="php://stdout"/>

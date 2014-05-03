@@ -52,7 +52,7 @@ class FileSystem extends AbstractAdapter
      */
     protected function getCacheCreationTime($fromCurrency, $toCurrency)
     {
-       return filemtime($this->getCacheFileLocation($fromCurrency, $toCurrency));
+        return filemtime($this->getCacheFileLocation($fromCurrency, $toCurrency));
     }
 
     /**

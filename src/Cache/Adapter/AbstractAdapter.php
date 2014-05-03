@@ -13,7 +13,10 @@ abstract class AbstractAdapter implements CacheAdapterInterface
     protected $cacheTimeout;
 
     /**
-     * {@inheritDoc)
+     * Sets cache timeout
+     *
+     * @param DateInterval $cacheTimeout
+     * @return self
      */
     public function setCacheTimeOut(DateInterval $cacheTimeout)
     {
@@ -23,7 +26,9 @@ abstract class AbstractAdapter implements CacheAdapterInterface
     }
 
     /**
-     * {@inheritDoc)
+     * Gets cache timeout
+     *
+     * @return DateInterval
      */
     public function getCacheTimeOut()
     {
@@ -43,7 +48,8 @@ abstract class AbstractAdapter implements CacheAdapterInterface
      */
     protected function isCacheExpired($fromCurrency, $toCurrency)
     {
-        return (time() - $this->getCacheCreationTime($fromCurrency, $toCurrency)) > $this->getCacheTimeOut()->format('%s');
+        $cacheCreationTime = $this->getCacheCreationTime($fromCurrency, $toCurrency);
+        return (time() - $cacheCreationTime) > $this->getCacheTimeOut()->format('%s');
     }
 
     /**

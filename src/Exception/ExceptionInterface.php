@@ -2,4 +2,5 @@
 namespace CurrencyConverter\Exception;
 
 interface ExceptionInterface
-{}
+{
+}
