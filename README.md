@@ -6,7 +6,7 @@ currency-converter-php
 [![Latest Unstable Version](https://poser.pugx.org/ujjwal/currency-converter/v/unstable.png)](https://packagist.org/packages/ujjwal/currency-converter)
 [![Total Downloads](https://poser.pugx.org/ujjwal/currency-converter/downloads.png)](https://packagist.org/packages/ujjwal/currency-converter)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ojhaujjwal/currency-converter-php/badges/quality-score.png?s=c4d93ce5c60894c09d2b4f7b1ec97d6956c9b23f)](https://scrutinizer-ci.com/g/ojhaujjwal/currency-converter-php/)
-[![Coverage Status](https://coveralls.io/repos/ojhaujjwal/currency-converter-php/badge.png)](https://coveralls.io/r/ojhaujjwal/currency-converter-php)
+[![Code Coverage](https://scrutinizer-ci.com/g/ojhaujjwal/currency-converter-php/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/ojhaujjwal/currency-converter-php/?branch=master)
 
 Currency Converter Library with features of caching and identifying currency from country Code
 

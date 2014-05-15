@@ -23,9 +23,7 @@
     "require-dev": {
         "ext-curl": "*",
         "zendframework/zend-cache": "2.*",
-        "phpunit/phpunit": "4.*",
-        "squizlabs/php_codesniffer": "1.4.*",
-        "satooshi/php-coveralls": "~0.6"
+        "phpunit/phpunit": "4.*"
     },
     "suggest": {
         "ext-curl": "Using the rate provider for gettting the rate from yahoo using curl extension",
