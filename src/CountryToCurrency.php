@@ -256,7 +256,7 @@ class CountryToCurrency
      *
      * @param  string $countryCode Country code
      * @return string
-     * @thrown Exception\InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      */
     public static function getCurrency($countryCode)
     {
