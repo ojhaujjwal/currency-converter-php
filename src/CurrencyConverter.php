@@ -125,6 +125,13 @@ class CurrencyConverter implements CurrencyConverterInterface
         return $this->cacheAdapter;
     }
 
+    /**
+     * Parses the Currency Arguments
+     *
+     * @param string|array $data
+     * @return string
+     * @throws Exception\InvalidArgumentException
+     */
     protected function parseCurrencyArgument($data)
     {
         if (is_string($data)) {
