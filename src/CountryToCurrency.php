@@ -6,7 +6,7 @@ class CountryToCurrency
 {
 
     /**
-     * @var array      key contains country code, value contains respective country currency
+     * @var array    key contains country code, value contains respective country currency
      */
     protected static $currencies = [
         'AF' => 'AFA',
@@ -256,7 +256,7 @@ class CountryToCurrency
      *
      * @param  string $countryCode Country code
      * @return string
-     *                            @thrown Exception\InvalidArgumentException
+     * @thrown Exception\InvalidArgumentException
      */
     public static function getCurrency($countryCode)
     {
