@@ -41,7 +41,7 @@ echo $converter->convert('USD', 'NPR');
 ## Installation
 This library depends on composer for installation . For installation of composer, please visit [getcomposer.org](//getcomposer.org). 
 
-Add `"ujjwal/currency-converter":"2.1.*"` to your composer.json and run `php composer.phar update`
+Add `"ujjwal/currency-converter":"2.2.*"` to your composer.json and run `php composer.phar update`
 
 ## Usage
 Please head on to [/examples](/examples) folder.
