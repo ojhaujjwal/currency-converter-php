@@ -133,7 +133,7 @@ class CountryToCurrency
         'LR' => 'LRD',
         'LY' => 'LYD',
         'LI' => 'CHF',
-        'LT' => 'LTL',
+        'LT' => 'EUR',
         'LU' => 'EUR',
         'MO' => 'MOP',
         'MK' => 'MKD',
