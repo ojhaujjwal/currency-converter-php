@@ -8,7 +8,7 @@ currency-converter-php
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ojhaujjwal/currency-converter-php/badges/quality-score.png?s=c4d93ce5c60894c09d2b4f7b1ec97d6956c9b23f)](https://scrutinizer-ci.com/g/ojhaujjwal/currency-converter-php/)
 [![Code Coverage](https://scrutinizer-ci.com/g/ojhaujjwal/currency-converter-php/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/ojhaujjwal/currency-converter-php/?branch=master)
 
-Currency Converter Library with features of caching and identifying currency from country Code
+Exchange rates/Currency Converter Library with features of caching and identifying currency from country code.
 
 ## Getting started
 ```php
