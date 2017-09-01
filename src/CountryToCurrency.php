@@ -127,7 +127,7 @@ class CountryToCurrency
         'KW' => 'KWD',
         'KG' => 'KGS',
         'LA' => 'LAK',
-        'LV' => 'LVL',
+        'LV' => 'EUR',
         'LB' => 'LBP',
         'LS' => 'LSL',
         'LR' => 'LRD',
