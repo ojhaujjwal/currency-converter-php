@@ -41,7 +41,7 @@ class FixerApi implements ProviderInterface
     /**
      * @return AdapterInterface
      */
-    public function getAdapter(): AdapterInterface
+    public function getAdapter()
     {
         if (null === $this->adapter) {
             $this->setAdapter(new CurlAdapter());
