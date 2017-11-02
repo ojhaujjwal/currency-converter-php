@@ -38,7 +38,7 @@ class YahooApi implements ProviderInterface
     /**
      * @return CurlAdapter
      */
-    public function getAdapter(): CurlAdapter
+    public function getAdapter()
     {
         if (null === $this->adapter) {
             $this->setAdapter(new CurlAdapter());
