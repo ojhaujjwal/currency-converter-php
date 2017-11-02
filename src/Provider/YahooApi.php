@@ -1,6 +1,8 @@
 <?php
 namespace CurrencyConverter\Provider;
 
+use CurrencyConverter\Provider\Adapter\CurlAdapter;
+
 class YahooApi implements ProviderInterface
 {
     /**
@@ -9,6 +11,11 @@ class YahooApi implements ProviderInterface
      * @var strig
      */
     const API_URL = 'http://download.finance.yahoo.com/d/quotes.csv?s=[fromCurrency][toCurrency]=X&f=nl1d1t1';
+
+    /**
+     * @var CurlAdapter
+     */
+    protected $adapter;
 
     /**
      * {@inheritDoc}
@@ -23,16 +30,29 @@ class YahooApi implements ProviderInterface
             [$fromCurrency, $toCurrency],
             static::API_URL
         );
-
-        $ch = curl_init();
-        $timeout = 0;
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1)');
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-        $rawdata = curl_exec($ch);
-        curl_close($ch);
+        $rawdata = $this->getAdapter()->getFile($url);
 
         return explode(',', $rawdata)[1];
     }
+
+    /**
+     * @return CurlAdapter
+     */
+    public function getAdapter(): CurlAdapter
+    {
+        if (null === $this->adapter) {
+            $this->setAdapter(new CurlAdapter());
+        }
+        return $this->adapter;
+    }
+
+    /**
+     * @param CurlAdapter $adapter
+     */
+    public function setAdapter(CurlAdapter $adapter)
+    {
+        $this->adapter = $adapter;
+    }
+
+
 }
