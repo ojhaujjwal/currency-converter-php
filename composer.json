@@ -23,7 +23,8 @@
     "require-dev": {
         "ext-curl": "*",
         "zendframework/zend-cache": "2.*",
-        "phpunit/phpunit": "4.*"
+        "phpunit/phpunit": "4.*",
+        "mockery/mockery": "^1.0"
     },
     "suggest": {
         "ext-curl": "Using the rate provider for gettting the rate from yahoo using curl extension",

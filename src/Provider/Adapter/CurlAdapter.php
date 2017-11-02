@@ -8,6 +8,9 @@ namespace CurrencyConverter\Provider\Adapter;
  */
 class CurlAdapter implements AdapterInterface
 {
+    /**
+     * @inheritdoc
+     */
     public function getFile($pathOrUrl)
     {
         $ch = curl_init();
