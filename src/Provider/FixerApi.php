@@ -1,13 +1,11 @@
 <?php
 namespace CurrencyConverter\Provider;
 
-use CurrencyConverter\Provider\Adapter\AdapterInterface;
-use CurrencyConverter\Provider\Adapter\CurlAdapter;
+use GuzzleHttp\Client;
 
 /**
  * Fetch rates from https://fixer.io
  *
- * @package CurrencyConverter\Provider
  */
 class FixerApi implements ProviderInterface
 {
@@ -19,9 +17,18 @@ class FixerApi implements ProviderInterface
     const FIXER_API_BASEPATH = 'https://api.fixer.io/latest';
 
     /**
-     * @var AdapterInterface
+     * @var Client
      */
-    protected $adapter;
+    protected $httpClient;
+
+    /**
+     * FixerApi constructor.
+     * @param Client $httpClient
+     */
+    public function __construct(Client $httpClient=null)
+    {
+        $this->httpClient = $httpClient;
+    }
 
     /**
      * @inheritdoc
@@ -33,27 +40,7 @@ class FixerApi implements ProviderInterface
             $toCurrency,
             $fromCurrency
         );
-        $result = json_decode($this->getAdapter()->getFile($path));
-
-        return $result->rates->$toCurrency;
-    }
-
-    /**
-     * @return AdapterInterface
-     */
-    public function getAdapter()
-    {
-        if (null === $this->adapter) {
-            $this->setAdapter(new CurlAdapter());
-        }
-        return $this->adapter;
-    }
-
-    /**
-     * @param AdapterInterface $adapter
-     */
-    public function setAdapter(AdapterInterface $adapter)
-    {
-        $this->adapter = $adapter;
+        $result = json_decode($this->httpClient->get($path)->getBody(), true);
+        return $result['rates'][$toCurrency];
     }
 }

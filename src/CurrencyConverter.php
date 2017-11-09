@@ -2,6 +2,8 @@
 
 namespace CurrencyConverter;
 
+use CurrencyConverter\Provider\FixerApi;
+
 class CurrencyConverter implements CurrencyConverterInterface
 {
     /**
@@ -77,7 +79,7 @@ class CurrencyConverter implements CurrencyConverterInterface
     public function getRateProvider()
     {
         if (!$this->rateProvider) {
-            $this->setRateProvider(new Provider\YahooApi());
+            $this->setRateProvider(new FixerApi());
         }
 
         return $this->rateProvider;
@@ -150,4 +152,6 @@ class CurrencyConverter implements CurrencyConverterInterface
 
         return $currency;
     }
+
+
 }
