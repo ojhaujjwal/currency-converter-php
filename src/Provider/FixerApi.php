@@ -27,7 +27,7 @@ class FixerApi implements ProviderInterface
      */
     public function __construct(Client $httpClient=null)
     {
-        $this->httpClient = $httpClient;
+        $this->httpClient = ($httpClient) ?: new Client();
     }
 
     /**

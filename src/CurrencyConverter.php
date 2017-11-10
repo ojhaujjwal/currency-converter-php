@@ -152,6 +152,4 @@ class CurrencyConverter implements CurrencyConverterInterface
 
         return $currency;
     }
-
-
 }
