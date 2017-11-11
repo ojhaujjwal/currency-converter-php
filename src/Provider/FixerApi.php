@@ -23,15 +23,15 @@ class FixerApi implements ProviderInterface
 
     /**
      * FixerApi constructor.
-     * @param Client $httpClient
+     * @param Client|null $httpClient
      */
-    public function __construct(Client $httpClient=null)
+    public function __construct(Client $httpClient = null)
     {
-        $this->httpClient = ($httpClient) ?: new Client();
+        $this->httpClient = $httpClient ?: new Client();
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getRate($fromCurrency, $toCurrency)
     {

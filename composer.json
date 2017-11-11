@@ -30,6 +30,6 @@
         "zendframework/zend-cache": "To use Zend Cache component for caching"
     },
     "require": {
-        "guzzlehttp/guzzle": "^6.3"
+        "guzzlehttp/guzzle": "5.* || 6.*"
     }
 }

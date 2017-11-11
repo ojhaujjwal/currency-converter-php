@@ -13,4 +13,4 @@ $zendCache = Zend\Cache\StorageFactory::factory(array(
 
 $cacheAdapter = new CurrencyConverter\Cache\Adapter\ZendAdapter($zendCache);
 $converter->setCacheAdapter($cacheAdapter);
-echo $converter->convert('USD', 'NPR');
+echo $converter->convert('USD', 'EUR');
