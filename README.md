@@ -35,7 +35,7 @@ echo $converter->convert('USD', 'NPR');
 
 ## Requirements
 
-* PHP version 5.4 or later
+* PHP version 5.5 or later
 * Curl Extension (Optional)
 
 ## Installation
