@@ -9,6 +9,6 @@
 namespace CurrencyConverter\Exception;
 
 
-class InvalidCurrencyException extends InvalidArgumentException implements ExceptionInterface
+class UnsupportedCurrencyException extends InvalidArgumentException implements ExceptionInterface
 {
 }

@@ -2,7 +2,7 @@
 
 namespace CurrencyConverter\Provider;
 
-use CurrencyConverter\Exception\InvalidCurrencyException;
+use CurrencyConverter\Exception\UnsupportedCurrencyException;
 use GuzzleHttp\Client;
 
 /**
@@ -45,7 +45,7 @@ class FixerApi implements ProviderInterface
         $result = json_decode($this->httpClient->get($path)->getBody(), true);
 
         if (!isset($result['rates'][$toCurrency])) {
-            throw new InvalidCurrencyException(sprintf('Undefined rate for "%s" currency.', $toCurrency));
+            throw new UnsupportedCurrencyException(sprintf('Undefined rate for "%s" currency.', $toCurrency));
         }
 
         return $result['rates'][$toCurrency];
