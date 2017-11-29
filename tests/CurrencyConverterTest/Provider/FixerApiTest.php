@@ -1,4 +1,5 @@
 <?php
+
 namespace CurrencyConverter\Provider;
 
 use GuzzleHttp\Client;
@@ -50,11 +51,11 @@ class FixerApiTest extends \PHPUnit_Framework_TestCase
             )
             ->will($this->returnValue($response));
 
-        $expectedExceptionThrown = FALSE;
+        $expectedExceptionThrown = false;
         try {
             (new FixerApi($httpClient))->getRate('EUR', 'XXX');
         } catch (\Exception $e) {
-            $expectedExceptionThrown = TRUE;
+            $expectedExceptionThrown = true;
         }
         $this->assertTrue($expectedExceptionThrown);
     }
