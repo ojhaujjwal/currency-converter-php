@@ -2,6 +2,7 @@
 
 namespace CurrencyConverter\Provider;
 
+use CurrencyConverter\Exception\UnsupportedCurrencyException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Stream;
 use Psr\Http\Message\ResponseInterface;
@@ -54,7 +55,7 @@ class FixerApiTest extends \PHPUnit_Framework_TestCase
         $expectedExceptionThrown = false;
         try {
             (new FixerApi($httpClient))->getRate('EUR', 'XXX');
-        } catch (\Exception $e) {
+        } catch (UnsupportedCurrencyException $e) {
             $expectedExceptionThrown = true;
         }
         $this->assertTrue($expectedExceptionThrown);
