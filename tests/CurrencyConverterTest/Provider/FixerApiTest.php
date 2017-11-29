@@ -52,14 +52,8 @@ class FixerApiTest extends \PHPUnit_Framework_TestCase
             )
             ->will($this->returnValue($response));
 
-        $expectedExceptionThrown = false;
-        try {
-            (new FixerApi($httpClient))->getRate('EUR', 'XXX');
-        } catch (UnsupportedCurrencyException $e) {
-            $expectedExceptionThrown = true;
-        }
-        $this->assertTrue($expectedExceptionThrown);
+        $this->setExpectedException(UnsupportedCurrencyException::class);
+        (new FixerApi($httpClient))->getRate('EUR', 'XXX');
     }
-
-
+    
 }
