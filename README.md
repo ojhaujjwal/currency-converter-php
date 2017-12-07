@@ -28,10 +28,9 @@ echo $converter->convert('USD', 'NPR');
 
 ## Why Use It
 
-* Reliable Rate, Uses Yahoo API
-* Caching of rate, to avoid connecting to Yahoo again and again
-* Conversion without curreny code(from country code)
-
+* Reliable Rate, Uses [fixer.io](http://fixer.io/) API
+* Caching of rate, to avoid connecting to fixer.io again and again
+* Conversion without currency code(from country code)
 
 ## Requirements
 
