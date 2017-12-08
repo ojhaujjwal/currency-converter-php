@@ -50,4 +50,13 @@ class FixerApi implements ProviderInterface
 
         return $result['rates'][$toCurrency];
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSupportedCurrencies()
+    {
+        $result = json_decode($this->httpClient->get(self::FIXER_API_BASEPATH)->getBody(), true);
+        return array_keys($result['rates']);
+    }
 }
