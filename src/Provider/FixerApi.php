@@ -45,9 +45,18 @@ class FixerApi implements ProviderInterface
         $result = json_decode($this->httpClient->get($path)->getBody(), true);
 
         if (!isset($result['rates'][$toCurrency])) {
-            throw new UnsupportedCurrencyException(sprintf('Undefined rate for "%s" currency.', $toCurrency));
+            throw new UnsupportedCurrencyException(sprintf(UnsupportedCurrencyException::UNSUPPORTED_CURRENCY_MSG, $toCurrency));
         }
 
         return $result['rates'][$toCurrency];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSupportedCurrencies()
+    {
+        $result = json_decode($this->httpClient->get(self::FIXER_API_BASEPATH)->getBody(), true);
+        return array_merge([$result['base']], array_keys($result['rates']));
     }
 }

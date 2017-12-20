@@ -2,6 +2,7 @@
 
 namespace CurrencyConverter;
 
+use CurrencyConverter\Exception\UnsupportedCurrencyException;
 use CurrencyConverter\Provider\FixerApi;
 
 class CurrencyConverter implements CurrencyConverterInterface
@@ -31,6 +32,16 @@ class CurrencyConverter implements CurrencyConverterInterface
         $fromCurrency = $this->parseCurrencyArgument($from);
         $toCurrency = $this->parseCurrencyArgument($to);
 
+
+        if (!$this->isSupportedCurrency($fromCurrency)) {
+            throw new UnsupportedCurrencyException(sprintf(UnsupportedCurrencyException::UNSUPPORTED_CURRENCY_MSG, $fromCurrency));
+        }
+
+        if (!$this->isSupportedCurrency($toCurrency)) {
+            throw new UnsupportedCurrencyException(sprintf(UnsupportedCurrencyException::UNSUPPORTED_CURRENCY_MSG, $toCurrency));
+        }
+
+
         if ($this->isCacheable()) {
             if ($this->getCacheAdapter()->cacheExists($fromCurrency, $toCurrency)) {
                 return $this->getCacheAdapter()->getRate($fromCurrency, $toCurrency) * $amount;
@@ -46,6 +57,34 @@ class CurrencyConverter implements CurrencyConverterInterface
         }
 
         return $rate * $amount;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getSupportedCurrencies()
+    {
+        if ($this->isCacheable()) {
+            if ($this->getCacheAdapter()->supportedCurrenciesCacheExists()) {
+                return $this->getCacheAdapter()->getSupportedCurrencies();
+            }
+        }
+
+        $supportedCurrencies = $this->getRateProvider()->getSupportedCurrencies();
+
+        if ($this->isCacheable()) {
+            $this->getCacheAdapter()->createSupportedCurrenciesCache($supportedCurrencies);
+        }
+
+        return $supportedCurrencies;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function isSupportedCurrency($currencyCode)
+    {
+        return in_array($currencyCode, $this->getSupportedCurrencies());
     }
 
     /**

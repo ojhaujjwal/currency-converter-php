@@ -1,8 +1,10 @@
 <?php
+
 namespace CurrencyConverterTest\Cache\Adapter;
 
-use CurrencyConverter\Cache\Adapter\FileSystem;
 use CurrencyConverter\Cache\Adapter\CacheAdapterInterface;
+use CurrencyConverter\Cache\Adapter\FileSystem;
+use CurrencyConverter\Cache\Adapter\ProvidesSupportedCurrenciesCacheInterface;
 use DateInterval;
 
 class FileSystemTest extends \PHPUnit_Framework_TestCase
@@ -48,4 +50,23 @@ class FileSystemTest extends \PHPUnit_Framework_TestCase
         $adapter->setCacheTimeOut($dateInterval);
         $this->assertEquals($dateInterval, $adapter->getCacheTimeOut());
     }
+
+    public function testCreateSupportedCurrenciesCache()
+    {
+        $cachePath = __DIR__ . '/../../../resources/cache';
+        $adapter = new FileSystem($cachePath);
+        $adapter->createSupportedCurrenciesCache(['ABC', 'DEF']);
+        $this->assertEquals(['ABC', 'DEF'], unserialize(file_get_contents($cachePath . '/supported-currencies.cache')));
+        return $adapter;
+    }
+
+    /**
+     * @depends testCreateSupportedCurrenciesCache
+     */
+    public function testSupportedCurrenciesCacheExists(ProvidesSupportedCurrenciesCacheInterface $adapter)
+    {
+        $adapter->setCacheTimeOut(DateInterval::createFromDateString('123123123 seconds'));
+        $this->assertTrue($adapter->supportedCurrenciesCacheExists());
+    }
+
 }

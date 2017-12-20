@@ -1,4 +1,5 @@
 <?php
+
 namespace CurrencyConverter\Cache\Adapter;
 
 interface CacheAdapterInterface
@@ -26,7 +27,7 @@ interface CacheAdapterInterface
      *
      * @param  string $fromCurrency
      * @param  string $toCurrency
-     *                              @param float rate
+     * @param  float $rate
      * @return void
      */
     public function createCache($fromCurrency, $toCurrency, $rate);

@@ -1,4 +1,5 @@
 <?php
+
 namespace CurrencyConverter\Cache\Adapter;
 
 use Zend\Cache\Storage\StorageInterface;
@@ -6,7 +7,7 @@ use Zend\Cache\Storage\StorageInterface;
 /**
  * An abstraction layer between this library and Zend Cache Component
  */
-class ZendAdapter implements CacheAdapterInterface
+class ZendAdapter implements CacheAdapterInterface, ProvidesSupportedCurrenciesCacheInterface
 {
     /**
      * @var StorageInterface
@@ -47,8 +48,35 @@ class ZendAdapter implements CacheAdapterInterface
         return $this->storage->setItem($this->getCacheItemName($fromCurrency, $toCurrency), $rate);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     protected function getCacheItemName($fromCurrency, $toCurrency)
     {
         return $fromCurrency . '-' . $toCurrency;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function supportedCurrenciesCacheExists()
+    {
+        return $this->storage->hasItem(ProvidesSupportedCurrenciesCacheInterface::SUPPORTED_CURRENCIES_CACHE_KEY_NAME);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getSupportedCurrencies()
+    {
+        return $this->storage->getItem(ProvidesSupportedCurrenciesCacheInterface::SUPPORTED_CURRENCIES_CACHE_KEY_NAME);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function createSupportedCurrenciesCache($currencyList)
+    {
+        return $this->storage->setItem(ProvidesSupportedCurrenciesCacheInterface::SUPPORTED_CURRENCIES_CACHE_KEY_NAME, $currencyList);
     }
 }
