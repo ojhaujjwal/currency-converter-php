@@ -1,4 +1,5 @@
 <?php
+
 namespace CurrencyConverter\Cache\Adapter;
 
 class FileSystem extends AbstractAdapter
@@ -58,6 +59,14 @@ class FileSystem extends AbstractAdapter
     /**
      * {@inheritDoc}
      */
+    protected function getSupportedCurrenciesCacheCreationTime()
+    {
+        return filemtime($this->getSupportedCurrenciesCacheFileLocation());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function cacheExists($fromCurrency, $toCurrency)
     {
         $cacheFile = $this->getCacheFileLocation($fromCurrency, $toCurrency);
@@ -81,6 +90,16 @@ class FileSystem extends AbstractAdapter
     }
 
     /**
+     * Gets file location for specific currency conversion
+     *
+     * @return string
+     */
+    protected function getSupportedCurrenciesCacheFileLocation()
+    {
+        return $this->cachePath . '/' . ProvidesSupportedCurrenciesCacheInterface::SUPPORTED_CURRENCIES_CACHE_KEY_NAME . '.cache';
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function createCache($fromCurrency, $toCurrency, $rate)
@@ -98,5 +117,38 @@ class FileSystem extends AbstractAdapter
     public function getRate($fromCurrency, $toCurrency)
     {
         return file_get_contents($this->getCacheFileLocation($fromCurrency, $toCurrency));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    function supportedCurrenciesCacheExists()
+    {
+        $cacheFile = $this->getSupportedCurrenciesCacheFileLocation();
+        if (!is_readable($cacheFile)) {
+            return false;
+        }
+
+        return !$this->isSupportedCurrenciesCacheExpired();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    function getSupportedCurrencies()
+    {
+        return unserialize(file_get_contents($this->getSupportedCurrenciesCacheFileLocation()));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    function createSupportedCurrenciesCache($currencyList)
+    {
+        $cacheFile = $this->getSupportedCurrenciesCacheFileLocation();
+        if (!file_exists($cacheFile)) {
+            touch($cacheFile);
+        }
+        file_put_contents($cacheFile, serialize($currencyList));
     }
 }

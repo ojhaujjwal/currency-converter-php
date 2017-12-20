@@ -1,9 +1,10 @@
 <?php
+
 namespace CurrencyConverter\Cache\Adapter;
 
 use DateInterval;
 
-abstract class AbstractAdapter implements CacheAdapterInterface
+abstract class AbstractAdapter implements CacheAdapterInterface, ProvidesSupportedCurrenciesCacheInterface
 {
     /**
      * Interval of cache life
@@ -53,11 +54,30 @@ abstract class AbstractAdapter implements CacheAdapterInterface
     }
 
     /**
+     * Checks if supported currencies cache is expired
+     *
+     * @return bool
+     */
+    protected function isSupportedCurrenciesCacheExpired()
+    {
+        $cacheCreationTime = $this->getSupportedCurrenciesCacheCreationTime();
+        return (time() - $cacheCreationTime) > $this->getCacheTimeOut()->format('%s');
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function cacheExists($fromCurrency, $toCurrency)
     {
         return !$this->isCacheExpired($fromCurrency, $toCurrency);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function supportedCurrenciesCacheExists()
+    {
+        return !$this->isSupportedCurrenciesCacheExpired();
     }
 
     /**
@@ -68,4 +88,12 @@ abstract class AbstractAdapter implements CacheAdapterInterface
      * @return int
      */
     abstract protected function getCacheCreationTime($fromCurrency, $toCurrency);
+
+    /**
+     * Returns timestamp in which supported currencies cache was created
+     *
+     * @return int
+     */
+    abstract protected function getSupportedCurrenciesCacheCreationTime();
+
 }

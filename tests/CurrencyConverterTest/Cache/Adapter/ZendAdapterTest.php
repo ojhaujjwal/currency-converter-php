@@ -1,4 +1,5 @@
 <?php
+
 namespace CurrencyConverterTest\Cache\Adapter;
 
 use CurrencyConverter\Cache\Adapter\ZendAdapter;
@@ -14,6 +15,16 @@ class ZendAdapterTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValueMap([['USD-GBP', true], ['USD-NPR', false]]));
         $this->assertTrue($adapter->cacheExists('USD', 'GBP'));
         $this->assertFalse($adapter->cacheExists('USD', 'NPR'));
+    }
+
+    public function testSupportedCurrenciesCacheExists()
+    {
+        $mock = $this->getMock('Zend\Cache\Storage\StorageInterface');
+        $adapter = new ZendAdapter($mock);
+        $mock->expects($this->any())
+            ->method('hasItem')
+            ->will($this->returnValueMap([['supported-currencies', true]]));
+        $this->assertTrue($adapter->supportedCurrenciesCacheExists());
     }
 
     public function testGetRate()
@@ -42,4 +53,5 @@ class ZendAdapterTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue(null));
         $adapter->createCache('USD', 'GBP', 0.95);
     }
+
 }
