@@ -2,6 +2,7 @@
 namespace CurrencyConverterTest;
 
 use CurrencyConverter\CurrencyConverter;
+use CurrencyConverter\Provider\ExchangeRatesIo;
 
 class CurrencyConverterTest extends \PHPUnit_Framework_TestCase
 {
@@ -47,5 +48,11 @@ class CurrencyConverterTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('CurrencyConverter\Exception\InvalidArgumentException');
         $converter->convert([], []);
         $converter->convert(29, 456);
+    }
+
+    public function testDefaultRateProvider()
+    {
+        $converter = new CurrencyConverter();
+        $this->assertInstanceOf(ExchangeRatesIo::class, $converter->getRateProvider());
     }
 }
