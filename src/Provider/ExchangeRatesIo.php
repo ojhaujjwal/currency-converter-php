@@ -1,29 +1,20 @@
 <?php
-
 namespace CurrencyConverter\Provider;
 
 use CurrencyConverter\Exception\UnsupportedCurrencyException;
 use GuzzleHttp\Client;
 
 /**
- * Fetch rates from https://fixer.io
- *
+ * Get exchange rates from https://exchangeratesapi.io/
  */
-class FixerApi implements ProviderInterface
+class ExchangeRatesIo implements ProviderInterface
 {
     /**
      * Base url of fixer api
      *
      * @var string
      */
-    const FIXER_API_BASEPATH = 'data.fixer.io/api/latest';
-
-    /**
-     * The fixer access key
-     *
-     * @var string
-     */
-    protected $accessKey;
+    const EXCHANGERATESIO_API_BASEPATH = 'https://exchangeratesapi.io/api/latest';
 
     /**
      * @var Client
@@ -31,22 +22,12 @@ class FixerApi implements ProviderInterface
     protected $httpClient;
 
     /**
-     * Flag to switch http(s) usage. required as fixer.io enables https api endpoints for paid accounts only
-     * @var bool
-     */
-    protected $useHttps = false;
-
-    /**
      * FixerApi constructor.
-     * @param string $accessKey
      * @param Client|null $httpClient
-     * @param bool $useHttps defaults to false
      */
-    public function __construct($accessKey, Client $httpClient = null, $useHttps = false)
+    public function __construct(Client $httpClient = null)
     {
-        $this->accessKey = $accessKey;
         $this->httpClient = $httpClient ?: new Client();
-        $this->useHttps = (bool)$useHttps;
     }
 
     /**
@@ -55,9 +36,7 @@ class FixerApi implements ProviderInterface
     public function getRate($fromCurrency, $toCurrency)
     {
         $path = sprintf(
-            '%s' . self::FIXER_API_BASEPATH . '?access_key=%s&symbols=%s&base=%s',
-            ($this->useHttps) ? 'https://' : 'http://',
-            $this->accessKey,
+            self::EXCHANGERATESIO_API_BASEPATH . '?symbols=%s&base=%s',
             $toCurrency,
             $fromCurrency
         );

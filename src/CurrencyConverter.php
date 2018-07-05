@@ -2,7 +2,7 @@
 
 namespace CurrencyConverter;
 
-use CurrencyConverter\Provider\FixerApi;
+use CurrencyConverter\Provider\ExchangeRatesIo;
 
 class CurrencyConverter implements CurrencyConverterInterface
 {
@@ -79,7 +79,7 @@ class CurrencyConverter implements CurrencyConverterInterface
     public function getRateProvider()
     {
         if (!$this->rateProvider) {
-            $this->setRateProvider(new FixerApi());
+            $this->setRateProvider(new ExchangeRatesIo());
         }
 
         return $this->rateProvider;
