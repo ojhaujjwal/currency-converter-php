@@ -21,7 +21,7 @@ class ExchangeRatesIoTest extends \PHPUnit_Framework_TestCase
         $httpClient
             ->expects($this->once())
             ->method('get')
-            ->with(ExchangeRatesIo::EXCHANGERATESIO_API_BASEPATH . '?symbols=USD&base=EUR')
+            ->with('https://' . ExchangeRatesIo::EXCHANGERATESIO_API_BASEPATH . '?symbols=USD&base=EUR')
             ->will($this->returnValue($response));
         $this->assertEquals(
             1.1645,
@@ -42,7 +42,7 @@ class ExchangeRatesIoTest extends \PHPUnit_Framework_TestCase
         $httpClient
             ->expects($this->once())
             ->method('get')
-            ->with(ExchangeRatesIo::EXCHANGERATESIO_API_BASEPATH . '?symbols=XXX&base=EUR')
+            ->with('https://' . ExchangeRatesIo::EXCHANGERATESIO_API_BASEPATH . '?symbols=XXX&base=EUR')
             ->will($this->returnValue($response));
 
         $this->setExpectedException(UnsupportedCurrencyException::class);
