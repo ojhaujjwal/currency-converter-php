@@ -23,7 +23,7 @@
     "require-dev": {
         "ext-curl": "*",
         "zendframework/zend-cache": "2.*",
-        "phpunit/phpunit": "4.*"
+        "phpunit/phpunit": "4.* || 5.*"
     },
     "suggest": {
         "ext-curl": "Using the rate provider for getting the rate from fixer.io using curl extension",
