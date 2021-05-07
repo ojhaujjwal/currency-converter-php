@@ -1,5 +1,4 @@
 <?php
-
 namespace CurrencyConverter\Provider;
 
 use CurrencyConverter\Exception\UnsupportedCurrencyException;
@@ -7,9 +6,9 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Stream;
 use Psr\Http\Message\ResponseInterface;
 
-class FixerApiTest extends \PHPUnit_Framework_TestCase
+class FranfurterApiTest extends \PHPUnit_Framework_TestCase
 {
-    public function testGetRate()
+    public function testGetRateWithDefaults()
     {
         $response = $this->getMock(ResponseInterface::class);
         $response
@@ -22,12 +21,13 @@ class FixerApiTest extends \PHPUnit_Framework_TestCase
         $httpClient
             ->expects($this->once())
             ->method('get')
-            ->with('http://' . FixerApi::FIXER_API_BASEPATH . '?access_key=SOME-ACCESS-KEY&symbols=USD&base=EUR')
+            ->with('https://' . FrankfurterApi::DEFAULT_BASEPATH . '?symbols=USD&base=EUR')
             ->will($this->returnValue($response));
-        $this->assertEquals(
-            1.1645,
-            (new FixerApi('SOME-ACCESS-KEY', $httpClient))->getRate('EUR', 'USD')
-        );
+
+        $provider = new FrankfurterApi();
+        $provider->setHttpClient($httpClient);
+
+        $this->assertEquals(1.1645, $provider->getRate('EUR', 'USD'));
     }
 
     public function testGetUnavailableRate()
@@ -43,14 +43,45 @@ class FixerApiTest extends \PHPUnit_Framework_TestCase
         $httpClient
             ->expects($this->once())
             ->method('get')
-            ->with('http://' . FixerApi::FIXER_API_BASEPATH . '?access_key=SOME-ACCESS-KEY&symbols=XXX&base=EUR')
+            ->with('https://' . FrankfurterApi::DEFAULT_BASEPATH . '?symbols=XXX&base=EUR')
             ->will($this->returnValue($response));
 
         $this->setExpectedException(UnsupportedCurrencyException::class);
-        (new FixerApi('SOME-ACCESS-KEY', $httpClient))->getRate('EUR', 'XXX');
+
+        $provider = new FrankfurterApi();
+        $provider->setHttpClient($httpClient);
+        $provider->getRate('EUR', 'XXX');
     }
 
-    public function testHttpsUsage()
+    public function dataUrlOptions()
+    {
+        return [
+            [
+                'http://' . FrankfurterApi::DEFAULT_BASEPATH . '?symbols=USD&base=EUR',
+                FrankfurterApi::DEFAULT_BASEPATH,
+                false
+            ],
+            [
+                'https://' . FrankfurterApi::DEFAULT_BASEPATH . '?symbols=USD&base=EUR',
+                FrankfurterApi::DEFAULT_BASEPATH,
+                true
+            ],
+            [
+                'http://my-instance.dev/latest?symbols=USD&base=EUR',
+                'my-instance.dev/latest',
+                false
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider dataUrlOptions
+     *
+     * @param string $expectedRequestUrl
+     * @param string $basePath
+     * @param boolean $useHttps
+     */
+    public function testGetRate($expectedRequestUrl, $basePath, $useHttps)
     {
         $response = $this->getMock(ResponseInterface::class);
         $response
@@ -63,12 +94,12 @@ class FixerApiTest extends \PHPUnit_Framework_TestCase
         $httpClient
             ->expects($this->once())
             ->method('get')
-            ->with('https://' . FixerApi::FIXER_API_BASEPATH . '?access_key=SOME-ACCESS-KEY&symbols=USD&base=EUR')
+            ->with($expectedRequestUrl)
             ->will($this->returnValue($response));
-        $this->assertEquals(
-            1.1645,
-            (new FixerApi('SOME-ACCESS-KEY', $httpClient, true))->getRate('EUR', 'USD')
-        );
+
+        $provider = new FrankfurterApi($basePath, $useHttps);
+        $provider->setHttpClient($httpClient);
+
+        $this->assertEquals(1.1645, $provider->getRate('EUR', 'USD'));
     }
-    
 }
