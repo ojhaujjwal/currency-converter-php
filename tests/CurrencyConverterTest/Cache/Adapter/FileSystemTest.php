@@ -2,50 +2,76 @@
 namespace CurrencyConverterTest\Cache\Adapter;
 
 use CurrencyConverter\Cache\Adapter\FileSystem;
-use CurrencyConverter\Cache\Adapter\CacheAdapterInterface;
 use DateInterval;
 
 class FileSystemTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var FileSystem
+     */
+    private $adapter;
+
+    /**
+     * @var string
+     */
+    private $cachePath;
+
+    public function setUp()
+    {
+        $this->cachePath = __DIR__ . '/../../../resources/cache';
+        $this->adapter = new FileSystem($this->cachePath);
+    }
+
     public function testSetCachePath()
     {
-        $adapter = new FileSystem(__DIR__);
-        $this->assertEquals(__DIR__, $adapter->getCachePath());
+        $this->assertEquals($this->cachePath, $this->adapter->getCachePath());
     }
 
     public function testGetExceptionWithInvalidCachePath()
     {
         $this->setExpectedException('CurrencyConverter\Cache\Adapter\Exception\CachePathNotFoundException');
-        $adapter = new FileSystem(__DIR__ . '/asf/');
+        new FileSystem(__DIR__ . '/asf/');
     }
 
     public function testCreateCache()
     {
-        $cachePath = __DIR__ . '/../../../resources/cache';
-        $adapter = new FileSystem($cachePath);
-        $adapter->createCache('ABC', 'DEF', 10);
-        $this->assertEquals(10, file_get_contents($cachePath . '/ABC-DEF.cache'));
-        $this->assertEquals(10, $adapter->getRate('ABC', 'DEF'));
+        $this->adapter->createCache('ABC', 'DEF', 10);
 
-        return $adapter;
+        $this->assertEquals(10, file_get_contents($this->cachePath . '/ABC-DEF.cache'));
+        $this->assertEquals(10, $this->adapter->getRate('ABC', 'DEF'));
+    }
+
+    public function dataCacheExists()
+    {
+        return [
+            [true, '123123123 seconds'],
+            [true, '2 day'],
+            [true, '5 hours'],
+            [true, '1 hour'],
+            [false, '60 seconds'],
+            [false, '1 minute'],
+        ];
     }
 
     /**
-     * @depends testCreateCache
+     * @dataProvider dataCacheExists
+     * @param bool $expectedResult
+     * @param string $dateInterval
      */
-    public function testCacheExists(CacheAdapterInterface $adapter)
+    public function testCacheExists($expectedResult, $dateInterval)
     {
-        $adapter->setCacheTimeOut(DateInterval::createFromDateString('123123123 seconds'));
-        $this->assertTrue($adapter->cacheExists('ABC', 'DEF'));
+        // Simulate 1h old cache item
+        touch($this->cachePath . '/ABC-DEF.cache', time() - 3600);
+
+        $this->adapter->setCacheTimeOut(DateInterval::createFromDateString($dateInterval));
+        $this->assertSame($expectedResult, $this->adapter->cacheExists('ABC', 'DEF'));
     }
 
-    /**
-     * @depends testCreateCache
-     */
-    public function testSetCacheTimeOut(CacheAdapterInterface $adapter)
+    public function testSetCacheTimeOut()
     {
-        $dateInterval = DateInterval::createFromDateString('123123123 seconds');
-        $adapter->setCacheTimeOut($dateInterval);
-        $this->assertEquals($dateInterval, $adapter->getCacheTimeOut());
+        $dateInterval = DateInterval::createFromDateString('10 seconds');
+        $this->adapter->setCacheTimeOut($dateInterval);
+
+        $this->assertEquals($dateInterval, $this->adapter->getCacheTimeOut());
     }
 }
