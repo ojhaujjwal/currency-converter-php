@@ -2,6 +2,7 @@
 namespace CurrencyConverter\Cache\Adapter;
 
 use DateInterval;
+use DateTimeImmutable;
 
 abstract class AbstractAdapter implements CacheAdapterInterface
 {
@@ -49,7 +50,18 @@ abstract class AbstractAdapter implements CacheAdapterInterface
     protected function isCacheExpired($fromCurrency, $toCurrency)
     {
         $cacheCreationTime = $this->getCacheCreationTime($fromCurrency, $toCurrency);
-        return (time() - $cacheCreationTime) > $this->getCacheTimeOut()->format('%s');
+        return (time() - $cacheCreationTime) > $this->getCacheTimeOutInSeconds();
+    }
+
+    /**
+     * @return int
+     */
+    private function getCacheTimeOutInSeconds()
+    {
+        $reference = new DateTimeImmutable();
+        $endTime = $reference->add($this->getCacheTimeOut());
+
+        return $endTime->getTimestamp() - $reference->getTimestamp();
     }
 
     /**
